@@ -40,18 +40,18 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $user = User::find($id);
+        $user = User::find($request->id);
         $data = $request->all();
         if (isset($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
         if ($user) {
-            if ($user->delete()) {
-                return response()->json(['status' => 200, 'message' => '删除成功']);
+            if ($user->update($data)) {
+                return response()->json(['status' => 200, 'message' => '修改成功']);
             } else {
-                return response()->json(['status' => 300, 'message' => '删除失败']);
+                return response()->json(['status' => 300, 'message' => '修改失败']);
             }
         } else {
             return response()->json(['status' => 404, 'message' => '找不到这个用户']);

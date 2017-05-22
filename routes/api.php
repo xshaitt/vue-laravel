@@ -20,4 +20,4 @@ Route::middleware('api')->get('/user', function (Request $request) {
 Route::post('/user','UserController@create')->middleware('api');
 Route::get('/user','UserController@select')->middleware('api');
 Route::delete('/user/{id}','UserController@delete')->middleware('api');
-Route::patch('/user/{id}','UserController@update')->middleware('api');
+Route::patch('/user','UserController@update')->middleware('api');
